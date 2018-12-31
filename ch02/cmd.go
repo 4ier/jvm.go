@@ -4,7 +4,7 @@ import "flag"
 import "fmt"
 import "os"
 
-// 命令行结构体
+// Cmd 命令行结构体
 type Cmd struct {
 	helpFlag    bool
 	versionFlag bool
