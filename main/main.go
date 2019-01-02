@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"jvm.go/ch02/classpath"
+	"jvm.go/classpath"
 )
 
 func main() {

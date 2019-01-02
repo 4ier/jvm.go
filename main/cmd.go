@@ -1,10 +1,12 @@
 package main
 
-import "flag"
-import "fmt"
-import "os"
+import (
+	"flag"
+	"fmt"
+	"os"
+)
 
-// Cmd 命令行结构体
+// Cmd 命令行
 type Cmd struct {
 	helpFlag    bool
 	versionFlag bool
