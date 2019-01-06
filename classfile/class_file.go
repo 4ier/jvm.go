@@ -14,10 +14,10 @@ type ClassFile struct {
 	interfaces   []uint16
 	fields       []*MemberInfo
 	methods      []*MemberInfo
-	attributes   []AttrbuteInfo
+	attributes   []AttributeInfo
 }
 
-func Parse(classData []byte) (cf *ClassFile, err erros) {
+func Parse(classData []byte) (cf *ClassFile, err error) {
 	defer func() {
 		if r := recover(); r != nil {
 			var ok bool
@@ -47,16 +47,16 @@ func (me *ClassFile) read(reader *ClassReader) {
 	me.attributes = readAttributes(reader, me.constantPool)
 }
 
-func (me *ClassFile) MinorVersion() uint16       { return me.minorVersion }
-func (me *ClassFile) MajorVersion() uint16       { return me.majorVersion }
-func (me *ClassFile) ConstantPool() ConstantPool { return me.constantPool }
-func (me *ClassFile) AccessFlag() uint16         { return me.accessFlag }
-func (me *ClassFile) ThisClass() uint16          { return me.thisClass }
-func (me *ClassFile) SuperClass() uint16         { return me.superClass }
-func (me *ClassFile) Interfaces() []uint16       { return me.interfaces }
-func (me *ClassFile) Fields() []*MemberInfo      { return me.fields }
-func (me *ClassFile) Methods() []*MemberInfo     { return me.methods }
-func (me *ClassFile) Attributes() []AttrbuteInfo { return me.attributes }
+func (me *ClassFile) MinorVersion() uint16        { return me.minorVersion }
+func (me *ClassFile) MajorVersion() uint16        { return me.majorVersion }
+func (me *ClassFile) ConstantPool() ConstantPool  { return me.constantPool }
+func (me *ClassFile) AccessFlag() uint16          { return me.accessFlag }
+func (me *ClassFile) ThisClass() uint16           { return me.thisClass }
+func (me *ClassFile) SuperClass() uint16          { return me.superClass }
+func (me *ClassFile) Interfaces() []uint16        { return me.interfaces }
+func (me *ClassFile) Fields() []*MemberInfo       { return me.fields }
+func (me *ClassFile) Methods() []*MemberInfo      { return me.methods }
+func (me *ClassFile) Attributes() []AttributeInfo { return me.attributes }
 
 func (me *ClassFile) ClassName() string {
 	return me.constantPool.getClassName(me.thisClass)
@@ -64,7 +64,7 @@ func (me *ClassFile) ClassName() string {
 
 func (me *ClassFile) SuperClassName() string {
 	if me.superClass > 0 {
-		return me.constantPool.getClassName(me.SuperClass)
+		return me.constantPool.getClassName(me.superClass)
 	}
 	return ""
 }
