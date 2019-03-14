@@ -35,3 +35,13 @@ func (me *MemberInfo) Name() string {
 func (me *MemberInfo) Descriptor() string {
 	return me.cp.getUtf8(me.descriptorIndex)
 }
+
+func (me *MemberInfo) CodeAttribute() *CodeAttribute {
+    for _, attrInfo := range me.attributes {
+        switch attrInfo.(type) {
+        case *CodeAttribute:
+            return attrInfo.(*CodeAttribute)
+        }
+    }
+    return nil
+}

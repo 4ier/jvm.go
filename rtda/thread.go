@@ -30,3 +30,7 @@ func (me *Thread) PC() int {
 func (me *Thread) SetPC(pc int) {
 	me.pc = pc
 }
+
+func (me *Thread) NewFrame(maxLocals, maxStack uint) *Frame {
+    return newFrame(me, maxLocals, maxStack)
+}
